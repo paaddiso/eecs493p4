@@ -13,6 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    actionbutton.cpp \
+    clickablelabel.cpp \
+    globals.cpp \
+    commands.cpp \
+    boximage.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    actionbutton.h \
+    clickablelabel.h \
+    globals.h \
+    commands.h \
+    boximage.h
