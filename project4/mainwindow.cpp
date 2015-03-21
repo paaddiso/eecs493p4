@@ -37,14 +37,17 @@ MainWindow::MainWindow(QWidget *parent)
     createMenus();
     createStatusBar();
 
-    //layout
-    QVBoxLayout* vLayout = new QVBoxLayout();
-    vLayout->setAlignment(Qt::AlignTop);
-    vLayout->setSpacing(5);
-
     //widget
-    QWidget *controls = new QWidget();
-    controls->setLayout(vLayout);
+    QWidget *leftWidget = new QWidget();
+
+    //timer
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer->start(2000);
+
+    //dock
+    dock = new QDockWidget(tr("Slideshow"));
+    dock->setWidget(leftWidget);
 
     //scroll area
     QScrollArea *scrollArea = new QScrollArea;
@@ -54,20 +57,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     //splitter
     QSplitter *splitter = new QSplitter();
-    splitter->addWidget(controls);
+    splitter->addWidget(dock);
     splitter->addWidget(scrollArea);
     splitter->setStretchFactor(0,0);
     splitter->setStretchFactor(1,1);
 
     setCentralWidget(splitter);
-
- //   setUnifiedTitleAndToolBarOnMac(true);
 }
 
 //dtor
 MainWindow::~MainWindow()
 {
 
+}
+
+void MainWindow::update()
+{
+    cout << "MainWindow::update() called" << endl;
 }
 
 void MainWindow::about()

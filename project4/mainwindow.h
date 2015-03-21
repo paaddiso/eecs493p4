@@ -19,6 +19,7 @@ public:
 private slots:
     void about();
     void invalidMessage();
+    void update();
 
 private:
 

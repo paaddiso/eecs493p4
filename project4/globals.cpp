@@ -3,9 +3,13 @@
 #include <QString>
 #include <iostream>
 
+
+QTimer *timer;
+
 class BoxImage;
 BoxImage* globalBoxImg_ptr;
 
+QDockWidget *dock;
 QClipboard *clipboard = QApplication::clipboard();
 QString copiedPictureFilename;
 QUndoStack *undoStack;
