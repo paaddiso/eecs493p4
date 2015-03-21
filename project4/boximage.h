@@ -69,14 +69,13 @@ class BoxImage : public QWidget
         void clearWidgets(void);
         void updateUndoRedoActions(void);
         bool checkPictureFile(QString &filename);
-        int getLabelIndex(ClickableLabel*);
         int getPasteIndex(void);
-
 
     public:
         void addVectorOfCheckedFiles(std::vector<QString> filenames,int index);
         void addWidgetToGrid(QPixmap &pixmap,int index,QString &filename);
         void removeRange(int index,int range);
+        int getLabelIndex(ClickableLabel*);
 };
 
 #endif // BOXIMAGE_H
