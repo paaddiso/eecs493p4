@@ -1,6 +1,5 @@
 #include "globals.h"
 #include "mainwindow.h"
-#include "actionbutton.h"
 #include "boximage.h"
 
 #include <QtGui>
@@ -38,39 +37,10 @@ MainWindow::MainWindow(QWidget *parent)
     createMenus();
     createStatusBar();
 
-    //Buttons
-    ActionButton *addCollectionButton = new ActionButton();
-    addCollectionButton->setAction(boximg->colAct);
-    addCollectionButton->setText("Add Collection");
-    addCollectionButton->setMinimumWidth(150);
-    addCollectionButton->setMinimumHeight(70);
-
-    ActionButton *addImageButton = new ActionButton();
-    addImageButton->setAction(boximg->imgAct);
-    addImageButton->setText("Add Image");
-    addImageButton->setMinimumWidth(150);
-    addImageButton->setMinimumHeight(70);
-
-    ActionButton *deleteAllButton = new ActionButton();
-    deleteAllButton->setAction(boximg->deleteAct);
-    deleteAllButton->setText("Delete All Images");
-    deleteAllButton->setMinimumWidth(150);
-    deleteAllButton->setMinimumHeight(70);
-
-    ActionButton *deleteButton = new ActionButton();
-    deleteButton->setAction(boximg->deleteSingleAct);
-    deleteButton->setText("Delete Image");
-    deleteButton->setMinimumWidth(150);
-    deleteButton->setMinimumHeight(70);
-
     //layout
     QVBoxLayout* vLayout = new QVBoxLayout();
     vLayout->setAlignment(Qt::AlignTop);
     vLayout->setSpacing(5);
-    vLayout->addWidget(addCollectionButton);
-    vLayout->addWidget(addImageButton);
-    vLayout->addWidget(deleteAllButton);
-    vLayout->addWidget(deleteButton);
 
     //widget
     QWidget *controls = new QWidget();
