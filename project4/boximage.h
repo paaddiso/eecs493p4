@@ -78,6 +78,7 @@ class BoxImage : public QWidget
         void removeRange(int index,int range);
         int getLabelIndex(ClickableLabel*);
         const QPixmap* getPixmapAt(int index);
+        void updatePlayActionStatus();
 };
 
 #endif // BOXIMAGE_H

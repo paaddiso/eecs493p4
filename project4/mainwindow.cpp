@@ -285,5 +285,7 @@ void MainWindow::stop()
     cout << "MainWindow::stop() called" << endl;
     timer->stop();
     slideshowIsActive = false;
+    boximg->updatePlayActionStatus();
+    return;
 }
 

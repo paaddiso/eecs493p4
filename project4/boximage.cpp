@@ -315,6 +315,7 @@ void BoxImage::addVectorOfCheckedFiles(std::vector<QString> filenames,int index)
         addRawPictureFile(filename,index);
         index++;
     }
+    updatePlayActionStatus();
     return;
 }
 
@@ -542,4 +543,20 @@ void BoxImage::updateUndoRedoActions(void)
 const QPixmap* BoxImage::getPixmapAt(int index)
 {
     return widgets[index]->pixmap();
+}
+
+void BoxImage::updatePlayActionStatus()
+{
+    if(widgets.size()> 0 and !slideshowIsActive)
+    {
+       playAct->setEnabled(true);
+       if(currentlySelectedLabel){playFromAct->setEnabled(true);}
+       else{playFromAct->setEnabled(false);}
+    }
+    else
+    {
+        playAct->setEnabled(false);
+        playFromAct->setEnabled(false);
+    }
+    return;
 }
