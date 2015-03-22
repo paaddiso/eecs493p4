@@ -126,14 +126,17 @@ void MainWindow::createActions()
     playAct = new QAction(tr("&Play"), this);
     playAct->setStatusTip(tr("Start a slideshow!"));
     connect(playAct, SIGNAL(triggered()), this, SLOT(play()));
+    playAct->setEnabled(false);
 
     playFromAct = new QAction(tr("&Play from Selection"), this);
     playFromAct->setStatusTip(tr("Start a slideshow from current selection!"));
     connect(playFromAct, SIGNAL(triggered()), this, SLOT(playFromSelection()));
+    playFromAct->setEnabled(false);
 
     stopAct = new QAction(tr("&Stop"), this);
     stopAct->setStatusTip(tr("End the current show"));
     connect(stopAct, SIGNAL(triggered()), this, SLOT(stop()));
+    stopAct->setEnabled(false);
 }
 
 void MainWindow::createMenus()
@@ -212,9 +215,12 @@ void MainWindow::setTimer()
 //starts the show from a specific index
 void MainWindow::startShowFromIndex(int startIndex)
 {
+    playAct->setEnabled(false);
+    playFromAct->setEnabled(false);
     currentDisplayIndex = startIndex;
     slideshowIsActive = true;
     timer->start(timeout);
+    stopAct->setEnabled(true);
     return;
 }
 
