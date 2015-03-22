@@ -246,14 +246,21 @@ void MainWindow::startShowFromIndex(int startIndex)
 void MainWindow::play()
 {
     cout << "MainWindow::play() called" << endl;
-    if(boximg->widgets.size() > 0)
-    {
-        startShowFromIndex(boximg->widgets.size());
-    }
-    else
+    if(boximg->widgets.size() == 0)
     {
         showPopUp("Error","Cannot play because there are no images");
+        return;
     }
+    int start_index = currentDisplayIndex;
+
+    //fix start_index
+    if(start_index == 0 or start_index == -1)
+        start_index = (int) boximg->widgets.size();
+    else
+        start_index--;
+
+    //start show
+    startShowFromIndex(start_index);
     return;
 }
 

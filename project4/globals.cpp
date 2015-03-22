@@ -56,4 +56,7 @@ void endShow()
     currentDisplayIndex = -1;
     slideshowIsActive = false;
     slideshowIsPaused = false;
+    playAct->setEnabled(false);
+    playFromAct->setEnabled(false);
+    pauseAct->setEnabled(false);
 }
