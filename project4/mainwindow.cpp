@@ -234,8 +234,9 @@ void MainWindow::startShowFromIndex(int startIndex)
     playAct->setEnabled(false);
     playFromAct->setEnabled(false);
     currentDisplayIndex = startIndex;
-    slideshowIsActive = true;
+    update();
     timer->start(timeout);
+    slideshowIsActive = true;
     stopAct->setEnabled(true);
     return;
 }
@@ -246,7 +247,7 @@ void MainWindow::play()
     cout << "MainWindow::play() called" << endl;
     if(boximg->widgets.size() > 0)
     {
-        startShowFromIndex(0);
+        startShowFromIndex(boximg->widgets.size());
     }
     else
     {

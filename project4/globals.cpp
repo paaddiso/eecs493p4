@@ -50,6 +50,7 @@ void start_timer_if_show_in_progress()
 
 void endShow()
 {
+    cout <<"call globals.cpp/endShow()"<< endl;
     stop_timer_if_running();
     currentDisplayIndex = -1;
     slideshowIsActive = false;

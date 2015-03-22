@@ -377,12 +377,12 @@ void BoxImage::removeRange(int index,int range)
     {
         removeWidgetFromGrid(index);
     }
-    cout<<"check widget size and disable delete all"<<endl;
+    //cout<<"check widget size and disable delete all"<<endl;
     if(widgets.size()==0)
     {
        deleteAct->setEnabled(false);
     }
-    cout<<"check current selection and clear selection"<<endl;
+    //cout<<"check current selection and clear selection"<<endl;
     if(getLabelIndex(currentlySelectedLabel) == -1)
     {
         clearSelection();
