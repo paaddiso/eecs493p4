@@ -46,6 +46,7 @@ BoxImage::~BoxImage()
 
 void BoxImage::addImage(void)
 {
+    stop_timer_if_running();
     QString filename = QFileDialog::getOpenFileName(this,
                                     tr("Open File"),
                                     QDir::homePath());
@@ -57,11 +58,13 @@ void BoxImage::addImage(void)
         undoStack->push(addCommand);
         updateUndoRedoActions();
     }
+    start_timer_if_show_in_progress();
     return;
 }
 
 void BoxImage::addCollection(void)
 {
+    stop_timer_if_running();
     QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                     QDir::homePath(),
                                                     QFileDialog::ShowDirsOnly
@@ -88,11 +91,13 @@ void BoxImage::addCollection(void)
         undoStack->push(addCommand);
         updateUndoRedoActions();
     }
+    start_timer_if_show_in_progress();
     return;
 }
 
 void BoxImage::deleteAll(void)
 {
+    endShow();
     std::cout << "call BoxImage::deleteAll()" << std::endl;
     int size = (int) widgets.size();
     if(size > 0)
@@ -122,6 +127,7 @@ void BoxImage::clearWidgets(void)
 void BoxImage::deleteImage(void)
 {
     cout << "call BoxImage::deleteImage()" << endl;
+    stop_timer_if_running();
     if(currentlySelectedLabel)
     {
             cout << "getting index of currentlySelectedLabel...";
@@ -145,12 +151,16 @@ void BoxImage::deleteImage(void)
        cout <<"cannot delete because nothing is selected"<<endl;
     }
     clearSelection();
+    if(widgets.size()==0)
+       endShow();
+    start_timer_if_show_in_progress();
 }
 
 //delete single image
 void BoxImage::cut(void)
 {
     cout << "call BoxImage::cut()" << endl;
+//    stop_timer_if_running();
     if(currentlySelectedLabel)
     {
         copy();//copy image to clipboard before cutting
@@ -162,6 +172,10 @@ void BoxImage::cut(void)
        showPopUp("Friendly Message","Cannot remove image because there is no image selected.");
     }
     clearSelection();
+
+//    if(widgets.size()==0)
+//       endShow();
+//    start_timer_if_show_in_progress();
 }
 
 //returns the vector-index of the ClickableLabel with the id
@@ -251,6 +265,7 @@ void BoxImage::addPictureFile(QString &filename)
                                           QMessageBox::Yes|QMessageBox::No);
             if (reply == QMessageBox::Yes) {
               qDebug() << "Yes was clicked";
+              endShow();
               exit(0);
             } else {
               qDebug() << "No was clicked";
@@ -423,15 +438,19 @@ void BoxImage::shiftPixmapsDown(int index)
 
  void BoxImage::undo(void)
  {
+    stop_timer_if_running();
     cout << "call BoxImage::undo()" << endl;
     undoStack->undo();
     updateUndoRedoActions();
+    start_timer_if_show_in_progress();
  }
  void BoxImage::redo(void)
  {
+    stop_timer_if_running();
     cout << "call BoxImage::redo()" << endl;
     undoStack->redo();
     updateUndoRedoActions();
+    start_timer_if_show_in_progress();
  }
 
  void BoxImage::copy(void)
@@ -455,6 +474,7 @@ void BoxImage::shiftPixmapsDown(int index)
  void BoxImage::paste(void)
  {
      cout << "call BoxImage::paste()" << endl;
+     stop_timer_if_running();
      if(somethingOnClipboard)
      {
          if(getLabelIndex(currentlySelectedLabel) == -1)
@@ -472,6 +492,7 @@ void BoxImage::shiftPixmapsDown(int index)
      {
          cout <<"cannot paste"<<endl;
      }
+     start_timer_if_show_in_progress();
  }
 
  int BoxImage::getPasteIndex(void)
@@ -500,6 +521,7 @@ void BoxImage::clearSelection(void)
     copyAct->setEnabled(false);
     cutAct->setEnabled(false);
     deleteSingleAct->setEnabled(false);
+    playFromAct->setEnabled(false);
 }
 
 void BoxImage::updateUndoRedoActions(void)

@@ -47,3 +47,10 @@ void start_timer_if_show_in_progress()
         timer->start(timeout);
     return;
 }
+
+void endShow()
+{
+    stop_timer_if_running();
+    currentDisplayIndex = -1;
+    slideshowIsActive = false;
+}

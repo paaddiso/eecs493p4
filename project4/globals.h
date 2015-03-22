@@ -27,6 +27,7 @@ extern int currentDisplayIndex;
 extern bool slideshowIsActive;
 extern void stop_timer_if_running();
 extern void start_timer_if_show_in_progress();
+extern void endShow();
 
 
 extern QClipboard *clipboard;// = QApplication::clipboard();
