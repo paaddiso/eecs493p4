@@ -31,4 +31,9 @@ void ClickableLabel::mousePressEvent(QMouseEvent *event)
     globalBoxImg_ptr->copyAct->setEnabled(true);
     globalBoxImg_ptr->cutAct->setEnabled(true);
     globalBoxImg_ptr->deleteSingleAct->setEnabled(true);
+    if(!slideshowIsActive)
+    {
+        playFromAct->setEnabled(true);//allow to play from selection once label is selected
+    }
+    return;
 }
