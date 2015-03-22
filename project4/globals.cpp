@@ -12,6 +12,7 @@ QAction *pauseAct;
 int timeout;
 int currentDisplayIndex;
 bool slideshowIsActive;
+bool slideshowIsPaused;
 
 BoxImage* globalBoxImg_ptr;
 QClipboard *clipboard = QApplication::clipboard();
@@ -43,7 +44,7 @@ void stop_timer_if_running()
 
 void start_timer_if_show_in_progress()
 {
-    if(slideshowIsActive and !timer->isActive())
+    if(slideshowIsActive and !timer->isActive() and !slideshowIsPaused)
         timer->start(timeout);
     return;
 }
@@ -54,4 +55,5 @@ void endShow()
     stop_timer_if_running();
     currentDisplayIndex = -1;
     slideshowIsActive = false;
+    slideshowIsPaused = false;
 }

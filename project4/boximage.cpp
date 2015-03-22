@@ -549,9 +549,15 @@ void BoxImage::updatePlayActionStatus()
 {
     if(widgets.size()> 0 and !slideshowIsActive)
     {
-       playAct->setEnabled(true);
-       if(currentlySelectedLabel){playFromAct->setEnabled(true);}
-       else{playFromAct->setEnabled(false);}
+        playAct->setEnabled(true);
+        if(currentlySelectedLabel){playFromAct->setEnabled(true);}
+        else{playFromAct->setEnabled(false);}
+    }
+    else if (widgets.size()> 0 and slideshowIsActive and slideshowIsPaused)
+    {
+        playAct->setEnabled(true);
+        if(currentlySelectedLabel){playFromAct->setEnabled(true);}
+        else{playFromAct->setEnabled(false);}
     }
     else
     {

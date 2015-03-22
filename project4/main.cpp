@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     timeout = 3000;
     currentDisplayIndex = -1;
     slideshowIsActive = false;
+    slideshowIsPaused = false;
     undoStack = new QUndoStack();
     QApplication app(argc, argv);
     MainWindow window;

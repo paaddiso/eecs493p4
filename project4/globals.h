@@ -25,6 +25,7 @@ extern QAction *pauseAct;
 extern int timeout;
 extern int currentDisplayIndex;
 extern bool slideshowIsActive;
+extern bool slideshowIsPaused;
 extern void stop_timer_if_running();
 extern void start_timer_if_show_in_progress();
 extern void endShow();

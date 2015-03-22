@@ -237,6 +237,7 @@ void MainWindow::startShowFromIndex(int startIndex)
     update();
     timer->start(timeout);
     slideshowIsActive = true;
+    slideshowIsPaused = false;
     pauseAct->setEnabled(true);
     return;
 }
@@ -291,9 +292,10 @@ void MainWindow::playFromSelection()
 /* pause() */
 void MainWindow::pause()
 {
-    cout << "MainWindow::stop() called" << endl;
+    cout << "MainWindow::pause() called" << endl;
     timer->stop();
     slideshowIsActive = false;
+    slideshowIsPaused = true;
     boximg->updatePlayActionStatus();
     return;
 }
