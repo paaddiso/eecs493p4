@@ -254,7 +254,9 @@ void MainWindow::play()
     int start_index = currentDisplayIndex;
 
     //fix start_index
-    if(start_index == 0 or start_index == -1)
+    if(start_index > (int) boximg->widgets.size())
+        start_index = (int) boximg->widgets.size();
+    else if(start_index == 0 or start_index == -1)
         start_index = (int) boximg->widgets.size();
     else
         start_index--;

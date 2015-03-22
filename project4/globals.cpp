@@ -37,6 +37,7 @@ void showPopUp(const QString& title,const QString &text)
 
 void stop_timer_if_running()
 {
+    cout <<"call globals.cpp/stop_timer_if_running()"<< endl;
     if(timer->isActive())
         timer->stop();
     return;
@@ -44,6 +45,7 @@ void stop_timer_if_running()
 
 void start_timer_if_show_in_progress()
 {
+    cout <<"call globals.cpp/start_timer_if_show_in_progress()"<< endl;
     if(slideshowIsActive and !timer->isActive() and !slideshowIsPaused)
         timer->start(timeout);
     return;
