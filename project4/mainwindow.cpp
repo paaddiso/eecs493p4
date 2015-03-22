@@ -276,11 +276,19 @@ void MainWindow::playFromSelection()
         cerr << "[CRITICAL ERROR] index_of_selection is -1 in MainWindow::playFromSelection()" << endl;
         exit(1);
     }
+
+    //change index_of_selection to be one before itself
+    if(index_of_selection == 0)
+        index_of_selection = (int) boximg->widgets.size();
+    else
+        index_of_selection--;
+
+    //start show
     startShowFromIndex(index_of_selection);
     return;
 }
 
-/* stop() */
+/* pause() */
 void MainWindow::pause()
 {
     cout << "MainWindow::stop() called" << endl;
