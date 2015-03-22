@@ -62,7 +62,6 @@ MainWindow::MainWindow(QWidget *parent)
     //timer
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    timer->start(2000);
 }
 
 //dtor
@@ -203,22 +202,66 @@ void MainWindow::update()
 void MainWindow::setTimer()
 {
     cout << "MainWindow::setTimer() called" << endl;
+    stop_timer_if_running();
+
+        //do stuff
+
+    start_timer_if_show_in_progress();
+}
+
+//starts the show from a specific index
+void MainWindow::startShowFromIndex(int startIndex)
+{
+    currentDisplayIndex = startIndex;
+    slideshowIsActive = true;
+    timer->start(timeout);
+    return;
 }
 
 /* play() */
 void MainWindow::play()
 {
     cout << "MainWindow::play() called" << endl;
+    if(boximg->widgets.size() > 0)
+    {
+        startShowFromIndex(0);
+    }
+    else
+    {
+        showPopUp("Error","Cannot play because there are no images");
+    }
+    return;
 }
 
 /* playFromSelection() */
 void MainWindow::playFromSelection()
 {
     cout << "MainWindow::playFromSelection() called" << endl;
+    if(boximg->widgets.size() == 0)
+    {
+        showPopUp("Error","Cannot play because there are no images");
+        return;
+    }
+    if(!currentlySelectedLabel)
+    {
+        showPopUp("Error","Cannot play because there is nothing selected");
+        return;
+    }
+    int index_of_selection = boximg->getLabelIndex(currentlySelectedLabel);
+    if(index_of_selection == -1)
+    {
+        cerr << "[CRITICAL ERROR] index_of_selection is -1 in MainWindow::playFromSelection()" << endl;
+        exit(1);
+    }
+    startShowFromIndex(index_of_selection);
+    return;
 }
 
 /* stop() */
 void MainWindow::stop()
 {
     cout << "MainWindow::stop() called" << endl;
+    timer->stop();
+    slideshowIsActive = false;
 }
+

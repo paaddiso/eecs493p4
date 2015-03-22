@@ -59,6 +59,9 @@ private:
     QAction *aboutAct;
     QAction *invAct;
 
+    //helper functions
+    void startShowFromIndex(int startIndex);
+
 };
 
 #endif // MAINWINDOW_H

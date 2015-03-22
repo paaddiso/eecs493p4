@@ -6,6 +6,9 @@ int main(int argc, char *argv[])
 {
     currentlySelectedLabel = 0;
     somethingOnClipboard = false;
+    timeout = 3000;
+    currentDisplayIndex = -1;
+    slideshowIsActive = false;
     undoStack = new QUndoStack();
     QApplication app(argc, argv);
     MainWindow window;

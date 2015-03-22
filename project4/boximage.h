@@ -57,7 +57,6 @@ class BoxImage : public QWidget
         QScrollArea *scrollArea;
         QGridLayout *grid;
         QLabel *imageLabel;
-        std::vector<ClickableLabel*> widgets;
 
         void createActions(void);
         void shiftPixmapsUpAndInsert(QPixmap &pixmap,int index,QString &filename);
@@ -73,6 +72,7 @@ class BoxImage : public QWidget
         int getPasteIndex(void);
 
     public:
+        std::vector<ClickableLabel*> widgets;
         void addVectorOfCheckedFiles(std::vector<QString> filenames,int index);
         void addWidgetToGrid(QPixmap &pixmap,int index,QString &filename);
         void removeRange(int index,int range);
