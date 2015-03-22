@@ -14,6 +14,9 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QScrollArea>
+#include <QDialog>
+#include <QSlider>
+#include <QInputDialog>
 
 #include <iostream>
 
@@ -222,9 +225,10 @@ void MainWindow::setTimer()
 {
     cout << "MainWindow::setTimer() called" << endl;
     stop_timer_if_running();
-
         //do stuff
-
+        //QSlider *slider = new QSlider(Qt::Horizontal,0);
+        int input = QInputDialog::getInt (this, tr("get an int"), tr("input"), 3000,1000,5000,1000, 0, 0);
+        timeout = input;
     start_timer_if_show_in_progress();
 }
 
