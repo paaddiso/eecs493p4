@@ -310,6 +310,7 @@ void MainWindow::pause()
     slideshowIsActive = false;
     slideshowIsPaused = true;
     boximg->updatePlayActionStatus();
+    pauseAct->setEnabled(false);
     return;
 }
 
