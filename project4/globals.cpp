@@ -3,13 +3,17 @@
 #include <QString>
 #include <iostream>
 
-
 QTimer *timer;
-
-class BoxImage;
-BoxImage* globalBoxImg_ptr;
-
 QDockWidget *dock;
+QAction *setTimerAct;
+QAction *playAct;
+QAction *playFromAct;
+QAction *stopAct;
+int timeout;
+int currentDisplayIndex;
+bool slideshowIsActive;
+
+BoxImage* globalBoxImg_ptr;
 QClipboard *clipboard = QApplication::clipboard();
 QString copiedPictureFilename;
 QUndoStack *undoStack;
@@ -27,5 +31,19 @@ void showPopUp(const QString& title,const QString &text)
     msgBox.setWindowTitle(title);
     msgBox.setText(text);
     msgBox.exec();
+    return;
+}
+
+void stop_timer_if_running()
+{
+    if(timer->isActive())
+        timer->stop();
+    return;
+}
+
+void start_timer_if_show_in_progress()
+{
+    if(slideshowIsActive and !timer->isActive())
+        timer->start(timeout);
     return;
 }

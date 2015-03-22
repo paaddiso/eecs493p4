@@ -38,16 +38,11 @@ MainWindow::MainWindow(QWidget *parent)
     createStatusBar();
 
     //widget
-    QWidget *leftWidget = new QWidget();
-
-    //timer
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    timer->start(2000);
+    leftwidget = new QLabel();
 
     //dock
     dock = new QDockWidget(tr("Slideshow"));
-    dock->setWidget(leftWidget);
+    dock->setWidget(leftwidget);
 
     //scroll area
     QScrollArea *scrollArea = new QScrollArea;
@@ -63,6 +58,11 @@ MainWindow::MainWindow(QWidget *parent)
     splitter->setStretchFactor(1,1);
 
     setCentralWidget(splitter);
+
+    //timer
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    timer->start(2000);
 }
 
 //dtor
@@ -71,10 +71,6 @@ MainWindow::~MainWindow()
 
 }
 
-void MainWindow::update()
-{
-    cout << "MainWindow::update() called" << endl;
-}
 
 void MainWindow::about()
 {
@@ -123,6 +119,22 @@ void MainWindow::createActions()
     aboutAct = new QAction(tr("&About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
     connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
+
+    setTimerAct = new QAction(tr("&Set Timer"), this);
+    setTimerAct->setStatusTip(tr("Set the timer frequency"));
+    connect(setTimerAct, SIGNAL(triggered()), this, SLOT(setTimer()));
+
+    playAct = new QAction(tr("&Play"), this);
+    playAct->setStatusTip(tr("Start a slideshow!"));
+    connect(playAct, SIGNAL(triggered()), this, SLOT(play()));
+
+    playFromAct = new QAction(tr("&Play from Selection"), this);
+    playFromAct->setStatusTip(tr("Start a slideshow from current selection!"));
+    connect(playFromAct, SIGNAL(triggered()), this, SLOT(playFromSelection()));
+
+    stopAct = new QAction(tr("&Stop"), this);
+    stopAct->setStatusTip(tr("End the current show"));
+    connect(stopAct, SIGNAL(triggered()), this, SLOT(stop()));
 }
 
 void MainWindow::createMenus()
@@ -141,11 +153,18 @@ void MainWindow::createMenus()
     editMenu->addAction(boximg->colAct);
     editMenu->addAction(boximg->deleteAct);
     editMenu->addAction(boximg->deleteSingleAct);
+    editMenu->addSeparator();
     editMenu->addAction(boximg->undoAct);
     editMenu->addAction(boximg->redoAct);
+    editMenu->addSeparator();
     editMenu->addAction(boximg->cutAct);
     editMenu->addAction(boximg->copyAct);
     editMenu->addAction(boximg->pasteAct);
+    editMenu->addSeparator();
+    editMenu->addAction(setTimerAct);
+    editMenu->addAction(playAct);
+    editMenu->addAction(playFromAct);
+    editMenu->addAction(stopAct);
 
     menuBar()->addSeparator();
 
@@ -162,4 +181,44 @@ void MainWindow::createStatusBar()
 QString MainWindow::strippedName(const QString &fullFileName)
 {
     return QFileInfo(fullFileName).fileName();
+}
+
+
+/* update()
+ *
+ * this function is called periodically and is responsible for
+ * managing the "slideshow" functionality.
+ */
+void MainWindow::update()
+{
+    cout << "MainWindow::update() called" << endl;
+}
+
+/* setTimer()
+ *
+ * The timer should be settable from a dialog box using a QSlider
+ * (not text entry). Range should be 1 to 5 seconds. Setting the
+ * timer should have an undo.
+ */
+void MainWindow::setTimer()
+{
+    cout << "MainWindow::setTimer() called" << endl;
+}
+
+/* play() */
+void MainWindow::play()
+{
+    cout << "MainWindow::play() called" << endl;
+}
+
+/* playFromSelection() */
+void MainWindow::playFromSelection()
+{
+    cout << "MainWindow::playFromSelection() called" << endl;
+}
+
+/* stop() */
+void MainWindow::stop()
+{
+    cout << "MainWindow::stop() called" << endl;
 }

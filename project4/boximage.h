@@ -15,6 +15,7 @@
 #include <QClipboard>
 #include <QString>
 #include <QStringList>
+#include <QPixmap>
 
 #include <vector>
 
@@ -76,6 +77,7 @@ class BoxImage : public QWidget
         void addWidgetToGrid(QPixmap &pixmap,int index,QString &filename);
         void removeRange(int index,int range);
         int getLabelIndex(ClickableLabel*);
+        const QPixmap* getPixmapAt(int index);
 };
 
 #endif // BOXIMAGE_H

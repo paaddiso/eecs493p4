@@ -516,3 +516,8 @@ void BoxImage::updateUndoRedoActions(void)
     else
         redoAct->setEnabled(false);
 }
+
+const QPixmap* BoxImage::getPixmapAt(int index)
+{
+    return widgets[index]->pixmap();
+}

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "boximage.h"
+#include <QLabel>
 #include <QMainWindow>
 
 class QAction;
@@ -20,8 +21,15 @@ private slots:
     void about();
     void invalidMessage();
     void update();
+    void setTimer();
+    void play();
+    void playFromSelection();
+    void stop();
 
 private:
+
+    //Left-widget pointer
+    QLabel *leftwidget;
 
     //BoxImage pointer
     BoxImage *boximg;
@@ -50,6 +58,7 @@ private:
     QAction *saveAsAct;
     QAction *aboutAct;
     QAction *invAct;
+
 };
 
 #endif // MAINWINDOW_H
