@@ -194,6 +194,22 @@ QString MainWindow::strippedName(const QString &fullFileName)
 void MainWindow::update()
 {
     cout << "MainWindow::update() called" << endl;
+    if(currentDisplayIndex == -1)
+    {
+        cerr << "[CRITICAL ERROR] currentDisplayIndex is -1 in MainWindow::update()" << endl;
+        exit(1);
+    }
+    else if(currentDisplayIndex >= (int) boximg->widgets.size())
+    {
+        currentDisplayIndex = 0;
+    }
+    else
+    {
+        currentDisplayIndex++;
+    }
+
+    const QPixmap *pmap = boximg->getPixmapAt(currentDisplayIndex);
+    leftwidget->setPixmap(*pmap);
 }
 
 /* setTimer()
