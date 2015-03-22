@@ -21,7 +21,7 @@ extern QDockWidget *dock;
 extern QAction *setTimerAct;
 extern QAction *playAct;
 extern QAction *playFromAct;
-extern QAction *stopAct;
+extern QAction *pauseAct;
 extern int timeout;
 extern int currentDisplayIndex;
 extern bool slideshowIsActive;

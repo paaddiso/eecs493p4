@@ -24,7 +24,7 @@ private slots:
     void setTimer();
     void play();
     void playFromSelection();
-    void stop();
+    void pause();
 
 private:
 

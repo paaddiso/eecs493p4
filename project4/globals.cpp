@@ -8,7 +8,7 @@ QDockWidget *dock;
 QAction *setTimerAct;
 QAction *playAct;
 QAction *playFromAct;
-QAction *stopAct;
+QAction *pauseAct;
 int timeout;
 int currentDisplayIndex;
 bool slideshowIsActive;

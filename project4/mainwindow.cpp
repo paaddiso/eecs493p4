@@ -133,10 +133,10 @@ void MainWindow::createActions()
     connect(playFromAct, SIGNAL(triggered()), this, SLOT(playFromSelection()));
     playFromAct->setEnabled(false);
 
-    stopAct = new QAction(tr("&Stop"), this);
-    stopAct->setStatusTip(tr("End the current show"));
-    connect(stopAct, SIGNAL(triggered()), this, SLOT(stop()));
-    stopAct->setEnabled(false);
+    pauseAct = new QAction(tr("&Pause"), this);
+    pauseAct->setStatusTip(tr("Pause the current show"));
+    connect(pauseAct, SIGNAL(triggered()), this, SLOT(pause()));
+    pauseAct->setEnabled(false);
 }
 
 void MainWindow::createMenus()
@@ -166,7 +166,7 @@ void MainWindow::createMenus()
     editMenu->addAction(setTimerAct);
     editMenu->addAction(playAct);
     editMenu->addAction(playFromAct);
-    editMenu->addAction(stopAct);
+    editMenu->addAction(pauseAct);
 
     menuBar()->addSeparator();
 
@@ -237,7 +237,7 @@ void MainWindow::startShowFromIndex(int startIndex)
     update();
     timer->start(timeout);
     slideshowIsActive = true;
-    stopAct->setEnabled(true);
+    pauseAct->setEnabled(true);
     return;
 }
 
@@ -281,7 +281,7 @@ void MainWindow::playFromSelection()
 }
 
 /* stop() */
-void MainWindow::stop()
+void MainWindow::pause()
 {
     cout << "MainWindow::stop() called" << endl;
     timer->stop();
