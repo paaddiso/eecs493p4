@@ -199,7 +199,7 @@ void MainWindow::update()
         cerr << "[CRITICAL ERROR] currentDisplayIndex is -1 in MainWindow::update()" << endl;
         exit(1);
     }
-    else if(currentDisplayIndex >= (int) boximg->widgets.size())
+    else if(currentDisplayIndex >= (int) boximg->widgets.size()-1)
     {
         currentDisplayIndex = 0;
     }
