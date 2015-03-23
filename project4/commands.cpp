@@ -50,13 +50,19 @@ void RemoveCommand::undo()
 
 SetTimerCommand::SetTimerCommand(int a,int b)
 {
-    a++;
-    b++;
+    oldTime = a;
+    newTime = b;
 }
 
 SetTimerCommand::~SetTimerCommand(){}
 
-void SetTimerCommand::undo(){}
+void SetTimerCommand::undo()
+{
+    timeout = oldTime;
+}
 
-void SetTimerCommand::redo(){}
+void SetTimerCommand::redo()
+{
+    timeout = newTime;
+}
 

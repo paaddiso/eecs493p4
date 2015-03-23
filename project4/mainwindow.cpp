@@ -229,8 +229,9 @@ void MainWindow::setTimer()
         //do stuff
         //QSlider *slider = new QSlider(Qt::Horizontal,0);
         int input = QInputDialog::getInt (this, tr("get an int"), tr("input"), 3000,1000,5000,1000, 0, 0);
-        SetTimerCommand c(2,1);
-        timeout = input;
+        QUndoCommand *command = new SetTimerCommand(timeout,input);
+        undoStack->push(command);
+        //timeout = input;
     start_timer_if_show_in_progress();
 }
 
