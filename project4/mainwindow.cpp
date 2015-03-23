@@ -1,6 +1,7 @@
 #include "globals.h"
 #include "mainwindow.h"
 #include "boximage.h"
+#include "commands.h"
 
 #include <QtGui>
 #include <QAction>
@@ -228,6 +229,7 @@ void MainWindow::setTimer()
         //do stuff
         //QSlider *slider = new QSlider(Qt::Horizontal,0);
         int input = QInputDialog::getInt (this, tr("get an int"), tr("input"), 3000,1000,5000,1000, 0, 0);
+        SetTimerCommand c(2,1);
         timeout = input;
     start_timer_if_show_in_progress();
 }

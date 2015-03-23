@@ -33,5 +33,18 @@ class RemoveCommand : public QUndoCommand
         int index;
 };
 
+class SetTimerCommand : public QUndoCommand
+{
+    public:
+        SetTimerCommand(int a,int b);
+        ~SetTimerCommand();
+        void undo();
+        void redo();
+
+    private:
+        int oldTime;
+        int newTime;
+};
+
 #endif // COMMANDS_H
 

@@ -47,3 +47,16 @@ void RemoveCommand::undo()
 }
 
 /********************************************************************/
+
+SetTimerCommand::SetTimerCommand(int a,int b)
+{
+    a++;
+    b++;
+}
+
+SetTimerCommand::~SetTimerCommand(){}
+
+void SetTimerCommand::undo(){}
+
+void SetTimerCommand::redo(){}
+
