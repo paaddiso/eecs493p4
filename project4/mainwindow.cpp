@@ -6,8 +6,10 @@
 #include <QtGui>
 #include <QAction>
 #include <QPlainTextEdit>
+#include <QDialog>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QHBoxLayout>
 #include <QMenuBar>
 #include <QToolBar>
 #include <QStatusBar>
@@ -18,6 +20,7 @@
 #include <QDialog>
 #include <QSlider>
 #include <QInputDialog>
+#include <QDialogButtonBox>
 
 #include <iostream>
 
@@ -216,6 +219,26 @@ void MainWindow::update()
     leftwidget->setPixmap(*pmap);
 }
 
+int getSliderInput()
+{
+    QSlider * slider = new QSlider(Qt::Horizontal,0);
+    slider->setTickInterval(1);
+    slider->setRange(1,5);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok| QDialogButtonBox::Cancel);
+    QVBoxLayout *layout = new QVBoxLayout();
+    layout->addWidget(slider);
+    layout->addWidget(buttonBox);
+    QDialog box;
+    QObject::connect(buttonBox, SIGNAL(accepted()), &box, SLOT(accept()));
+    QObject::connect(buttonBox, SIGNAL(rejected()), &box, SLOT(reject()));
+    box.setModal(true);
+    box.setLayout(layout);
+    box.exec();
+    int input = slider->value() * 1000;
+    return input;
+}
+
 /* setTimer()
  *
  * The timer should be settable from a dialog box using a QSlider
@@ -226,12 +249,9 @@ void MainWindow::setTimer()
 {
     cout << "MainWindow::setTimer() called" << endl;
     stop_timer_if_running();
-        //do stuff
-        //QSlider *slider = new QSlider(Qt::Horizontal,0);
-        int input = QInputDialog::getInt (this, tr("get an int"), tr("input"), 3000,1000,5000,1000, 0, 0);
-        QUndoCommand *command = new SetTimerCommand(timeout,input);
-        undoStack->push(command);
-        //timeout = input;
+    int input = getSliderInput();
+    QUndoCommand *command = new SetTimerCommand(timeout,input);
+    undoStack->push(command);
     start_timer_if_show_in_progress();
 }
 
