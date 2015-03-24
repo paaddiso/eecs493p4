@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     createStatusBar();
 
     //widget
-    leftwidget = new AspectRatioPixmapLabel();
+    leftwidget = new QLabel();//AspectRatioPixmapLabel();
 
     //dock
     dock = new QDockWidget(tr("Slideshow"));

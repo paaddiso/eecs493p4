@@ -10,7 +10,9 @@ AspectRatioPixmapLabel::AspectRatioPixmapLabel(QWidget *parent) :
 void AspectRatioPixmapLabel::setPixmap ( const QPixmap & p)
 {
     pix = p;
-    QLabel::setPixmap(p);
+    //QLabel::setPixmap(p);
+    QLabel::setPixmap(pix.scaled(this->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    this->resize(width(), height());
 }
 
 int AspectRatioPixmapLabel::heightForWidth( int width ) const
