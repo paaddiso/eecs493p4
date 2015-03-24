@@ -219,12 +219,20 @@ void MainWindow::update()
     leftwidget->setPixmap(*pmap);
 }
 
-int getSliderInput()
+/* setTimer()
+ *
+ * The timer should be settable from a dialog box using a QSlider
+ * (not text entry). Range should be 1 to 5 seconds. Setting the
+ * timer should have an undo.
+ */
+void MainWindow::setTimer()
 {
+    cout << "MainWindow::setTimer() called" << endl;
+    stop_timer_if_running();
+
     QSlider * slider = new QSlider(Qt::Horizontal,0);
     slider->setTickInterval(1);
     slider->setRange(1,5);
-
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok| QDialogButtonBox::Cancel);
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(slider);
@@ -236,22 +244,13 @@ int getSliderInput()
     box.setLayout(layout);
     box.exec();
     int input = slider->value() * 1000;
-    return input;
-}
 
-/* setTimer()
- *
- * The timer should be settable from a dialog box using a QSlider
- * (not text entry). Range should be 1 to 5 seconds. Setting the
- * timer should have an undo.
- */
-void MainWindow::setTimer()
-{
-    cout << "MainWindow::setTimer() called" << endl;
-    stop_timer_if_running();
-    int input = getSliderInput();
-    QUndoCommand *command = new SetTimerCommand(timeout,input);
-    undoStack->push(command);
+    if(box.result() == QDialog::Accepted)
+    {
+        QUndoCommand *command = new SetTimerCommand(timeout,input);
+        undoStack->push(command);
+    }
+
     start_timer_if_show_in_progress();
 }
 
