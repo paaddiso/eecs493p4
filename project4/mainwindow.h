@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "boximage.h"
+#include "aspectratiopixmaplabel.h"
 #include <QLabel>
 #include <QMainWindow>
 

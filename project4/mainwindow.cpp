@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "boximage.h"
 #include "commands.h"
+#include "aspectratiopixmaplabel.h"
 
 #include <QtGui>
 #include <QAction>
@@ -45,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     createStatusBar();
 
     //widget
-    leftwidget = new QLabel();
+    leftwidget = new AspectRatioPixmapLabel();
 
     //dock
     dock = new QDockWidget(tr("Slideshow"));
