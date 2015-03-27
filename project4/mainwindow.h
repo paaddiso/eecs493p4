@@ -30,7 +30,7 @@ private slots:
 private:
 
     //Left-widget pointer
-    QLabel *leftwidget;
+    AspectRatioPixmapLabel *leftwidget;
 
     //BoxImage pointer
     BoxImage *boximg;

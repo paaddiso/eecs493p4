@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     createStatusBar();
 
     //widget
-    leftwidget = new QLabel();//AspectRatioPixmapLabel();
+    leftwidget = new AspectRatioPixmapLabel();
     QScrollArea *scrollArea2 = new QScrollArea;
     scrollArea2->setBackgroundRole(QPalette::Dark);
     scrollArea2->setWidget(leftwidget);
@@ -216,8 +216,8 @@ void MainWindow::update()
     }
 
     const QPixmap *pmap = boximg->getPixmapAt(currentDisplayIndex);
-    QPixmap pixmap_copy = pmap->scaled(300,300,Qt::KeepAspectRatio);
-    leftwidget->setPixmap(pixmap_copy);
+    //QPixmap pixmap_copy = pmap->scaled(300,300,Qt::KeepAspectRatio);
+    leftwidget->setPixmap(*pmap);
 }
 
 /* setTimer()
