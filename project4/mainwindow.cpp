@@ -47,10 +47,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     //widget
     leftwidget = new QLabel();//AspectRatioPixmapLabel();
+    QScrollArea *scrollArea2 = new QScrollArea;
+    scrollArea2->setBackgroundRole(QPalette::Dark);
+    scrollArea2->setWidget(leftwidget);
+    scrollArea2->setWidgetResizable(true);
 
     //dock
     dock = new QDockWidget(tr("Slideshow"));
-    dock->setWidget(leftwidget);
+    dock->setWidget(scrollArea2);
 
     //scroll area
     QScrollArea *scrollArea = new QScrollArea;
