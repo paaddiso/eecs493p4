@@ -26,7 +26,7 @@ using namespace std;
 
 void showPopUp(const QString& title,const QString &text)
 {
-    cout << "showPopUp() called" << endl;
+    //cout << "showPopUp() called" << endl;
     QMessageBox msgBox;
     msgBox.setModal(true);
     msgBox.setWindowTitle(title);
@@ -37,7 +37,7 @@ void showPopUp(const QString& title,const QString &text)
 
 void stop_timer_if_running()
 {
-    cout <<"call globals.cpp/stop_timer_if_running()"<< endl;
+    //cout <<"call globals.cpp/stop_timer_if_running()"<< endl;
     if(timer->isActive())
         timer->stop();
     return;
@@ -45,7 +45,7 @@ void stop_timer_if_running()
 
 void start_timer_if_show_in_progress()
 {
-    cout <<"call globals.cpp/start_timer_if_show_in_progress()"<< endl;
+    //cout <<"call globals.cpp/start_timer_if_show_in_progress()"<< endl;
     if(slideshowIsActive and !timer->isActive() and !slideshowIsPaused)
         timer->start(timeout);
     return;
@@ -53,7 +53,7 @@ void start_timer_if_show_in_progress()
 
 void endShow()
 {
-    cout <<"call globals.cpp/endShow()"<< endl;
+    //cout <<"call globals.cpp/endShow()"<< endl;
     stop_timer_if_running();
     currentDisplayIndex = -1;
     slideshowIsActive = false;

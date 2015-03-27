@@ -87,7 +87,6 @@ void MainWindow::about()
 
 void MainWindow::invalidMessage()
 {
-    cout << "MainWindow::invalidMessage() called" << endl;
     showPopUp("Invalid Command","This feature has not been implemented");
     return;
 }
@@ -228,7 +227,7 @@ void MainWindow::update()
  */
 void MainWindow::setTimer()
 {
-    cout << "MainWindow::setTimer() called" << endl;
+    //cout << "MainWindow::setTimer() called" << endl;
     stop_timer_if_running();
 
     QSlider * slider = new QSlider(Qt::Horizontal,0);
@@ -272,7 +271,7 @@ void MainWindow::startShowFromIndex(int startIndex)
 /* play() */
 void MainWindow::play()
 {
-    cout << "MainWindow::play() called" << endl;
+    //cout << "MainWindow::play() called" << endl;
     if(boximg->widgets.size() == 0)
     {
         showPopUp("Error","Cannot play because there are no images");
@@ -296,7 +295,7 @@ void MainWindow::play()
 /* playFromSelection() */
 void MainWindow::playFromSelection()
 {
-    cout << "MainWindow::playFromSelection() called" << endl;
+    //cout << "MainWindow::playFromSelection() called" << endl;
     if(boximg->widgets.size() == 0)
     {
         showPopUp("Error","Cannot play because there are no images");
@@ -328,7 +327,7 @@ void MainWindow::playFromSelection()
 /* pause() */
 void MainWindow::pause()
 {
-    cout << "MainWindow::pause() called" << endl;
+    //cout << "MainWindow::pause() called" << endl;
     timer->stop();
     slideshowIsActive = false;
     slideshowIsPaused = true;

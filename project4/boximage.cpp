@@ -98,7 +98,7 @@ void BoxImage::addCollection(void)
 void BoxImage::deleteAll(void)
 {
     endShow();
-    std::cout << "call BoxImage::deleteAll()" << std::endl;
+    //std::cout << "call BoxImage::deleteAll()" << std::endl;
     int size = (int) widgets.size();
     if(size > 0)
     {
@@ -126,7 +126,7 @@ void BoxImage::clearWidgets(void)
 
 void BoxImage::deleteImage(void)
 {
-    cout << "call BoxImage::deleteImage()" << endl;
+    //cout << "call BoxImage::deleteImage()" << endl;
     stop_timer_if_running();
     if(currentlySelectedLabel)
     {
@@ -159,8 +159,7 @@ void BoxImage::deleteImage(void)
 //delete single image
 void BoxImage::cut(void)
 {
-    cout << "call BoxImage::cut()" << endl;
-//    stop_timer_if_running();
+    //cout << "call BoxImage::cut()" << endl;
     if(currentlySelectedLabel)
     {
         copy();//copy image to clipboard before cutting
@@ -168,14 +167,9 @@ void BoxImage::cut(void)
     }
     else
     {
-       cout <<"cannot cut because nothing is selected"<<endl;
        showPopUp("Friendly Message","Cannot remove image because there is no image selected.");
     }
     clearSelection();
-
-//    if(widgets.size()==0)
-//       endShow();
-//    start_timer_if_show_in_progress();
 }
 
 //returns the vector-index of the ClickableLabel with the id
@@ -330,7 +324,7 @@ void BoxImage::addRawPictureFile(QString &filename,int index)
 
 void BoxImage::addWidgetToGrid(QPixmap &raw_pixmap, QPixmap &pixmap,int index,QString &filename)
 {
-    cout << "call BoxImage::addWidgetToGrid(QPixmap &pixmap,index=" << index << ",filename=" << filename.toLocal8Bit().constData() << ")" << endl;
+    //cout << "call BoxImage::addWidgetToGrid(QPixmap &pixmap,index=" << index << ",filename=" << filename.toLocal8Bit().constData() << ")" << endl;
     //always create new label and add to back of grid
     ClickableLabel *label = new ClickableLabel("");
     label->setAlignment((Qt::AlignCenter));
@@ -360,7 +354,7 @@ void BoxImage::addWidgetToGrid(QPixmap &raw_pixmap, QPixmap &pixmap,int index,QS
 
 void BoxImage::shiftPixmapsUpAndInsert(QPixmap &newpixmap,int index,QString &filename)
 {
-    std::cout << "call BoxImage::shiftPixmapsUpAndInsert(index="<< index << ",filename=" << filename.toLocal8Bit().constData() << ")" << endl;
+    //std::cout << "call BoxImage::shiftPixmapsUpAndInsert(index="<< index << ",filename=" << filename.toLocal8Bit().constData() << ")" << endl;
     for(int i=widgets.size()-1; i>index; i--)
     {
         const QPixmap *pm = widgets[i-1]->pixmap();
@@ -376,33 +370,27 @@ void BoxImage::shiftPixmapsUpAndInsert(QPixmap &newpixmap,int index,QString &fil
 
 void BoxImage::removeRange(int index,int range)
 {
-    std::cout << "call BoxImage::removeRange("<< index <<","<< range <<")" << std::endl;
+    //std::cout << "call BoxImage::removeRange("<< index <<","<< range <<")" << std::endl;
     for(int i=0; i<range; i++)
     {
         removeWidgetFromGrid(index);
     }
-    //cout<<"check widget size and disable delete all"<<endl;
+
     if(widgets.size()==0)
-    {
        deleteAct->setEnabled(false);
-    }
-    //cout<<"check current selection and clear selection"<<endl;
+
     if(getLabelIndex(currentlySelectedLabel) == -1)
-    {
         clearSelection();
-    }
-    cout<<"return from removeRange()"<<endl;
+
     return;
 }
 
 void BoxImage::removeWidgetFromGrid(int index)
 {
-    std::cout << "call BoxImage::removeWidgetFromGrid(" << index << ")" << endl;
+    //std::cout << "call BoxImage::removeWidgetFromGrid(" << index << ")" << endl;
     int size = (int) widgets.size();
     if(index != size-1)
-    {
         shiftPixmapsDown(index);
-    }
     if(size > 0)
     {
         delete widgets.back();//remove from grid
@@ -413,7 +401,7 @@ void BoxImage::removeWidgetFromGrid(int index)
 
 void BoxImage::shiftPixmapsDown(int index)
 {
-    std::cout << "call BoxImage::shiftPixmapsDown(index=" << index << ")" << endl;
+    //std::cout << "call BoxImage::shiftPixmapsDown(index=" << index << ")" << endl;
     int size = (int) widgets.size();
     for(int i=index; i<size-1; i++)
     {
@@ -445,7 +433,6 @@ void BoxImage::shiftPixmapsDown(int index)
  void BoxImage::undo(void)
  {
     stop_timer_if_running();
-    cout << "call BoxImage::undo()" << endl;
     undoStack->undo();
     updateUndoRedoActions();
     start_timer_if_show_in_progress();
@@ -453,7 +440,6 @@ void BoxImage::shiftPixmapsDown(int index)
  void BoxImage::redo(void)
  {
     stop_timer_if_running();
-    cout << "call BoxImage::redo()" << endl;
     undoStack->redo();
     updateUndoRedoActions();
     start_timer_if_show_in_progress();
@@ -461,7 +447,7 @@ void BoxImage::shiftPixmapsDown(int index)
 
  void BoxImage::copy(void)
  {
-     cout << "call BoxImage::copy()" << endl;
+     //cout << "call BoxImage::copy()" << endl;
      if(currentlySelectedLabel)
      {
          const QPixmap *pmap = currentlySelectedLabel->pixmap();
@@ -470,40 +456,30 @@ void BoxImage::shiftPixmapsDown(int index)
          somethingOnClipboard = true;
          pasteAct->setEnabled(true);
      }
-     else
-     {
-         cout <<"cannot copy"<<endl;
-     }
      return;
  }
 
  void BoxImage::paste(void)
  {
-     cout << "call BoxImage::paste()" << endl;
-     stop_timer_if_running();
-     if(somethingOnClipboard)
-     {
-         if(getLabelIndex(currentlySelectedLabel) == -1)
-             showPopUp("Warning","No image is selected. The picture will be pasted to the end of the grid.");
-        //QPixmap pmap = clipboard->pixmap();
-        //addWidgetToGrid(pmap,widgets.size(),copiedPictureFilename);
+    //cout << "call BoxImage::paste()" << endl;
+    stop_timer_if_running();
+    if(somethingOnClipboard)
+    {
+        if(getLabelIndex(currentlySelectedLabel) == -1)
+            showPopUp("Warning","No image is selected. The picture will be pasted to the end of the grid.");
         int index = getPasteIndex();
         std::vector<QString> filenames;
         filenames.push_back(copiedPictureFilename);
         QUndoCommand *addCommand = new AddCommand(filenames,index);
         undoStack->push(addCommand);
         updateUndoRedoActions();
-     }
-     else
-     {
-         cout <<"cannot paste"<<endl;
-     }
-     start_timer_if_show_in_progress();
+    }
+    start_timer_if_show_in_progress();
  }
 
  int BoxImage::getPasteIndex(void)
  {
-     cout << "call BoxImage::getPasteIndex()" << endl;
+     //cout << "call BoxImage::getPasteIndex()" << endl;
      int index = -1;
      if(currentlySelectedLabel)
      {
@@ -518,7 +494,7 @@ void BoxImage::shiftPixmapsDown(int index)
 
 void BoxImage::clearSelection(void)
 {
-    cout <<"call BoxImage::clearSelection()"<< endl;
+    //cout <<"call BoxImage::clearSelection()"<< endl;
     if(currentlySelectedLabel)
     {
       currentlySelectedLabel->setStyleSheet("");
