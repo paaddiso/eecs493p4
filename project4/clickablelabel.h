@@ -3,6 +3,7 @@
 
 #include "globals.h"
 #include <QString>
+#include <QPixmap>
 #include <QLabel>
 #include <QSize>
 
@@ -19,6 +20,7 @@ class ClickableLabel : public QLabel
        explicit ClickableLabel(const QString& text="", QWidget* parent=0);
        int id;
        QString filename;
+       QPixmap internalPixmap;
 
     signals:
         void clicked();

@@ -321,13 +321,14 @@ void BoxImage::addVectorOfCheckedFiles(std::vector<QString> filenames,int index)
 
 void BoxImage::addRawPictureFile(QString &filename,int index)
 {
-    QImage image(filename);
-    QImage image2 = image.scaled(150,150,Qt::KeepAspectRatio);
-    QPixmap pmap = QPixmap::fromImage(image2);
-    addWidgetToGrid(pmap,index,filename);
+    QImage image1(filename);
+    QImage image2 = image1.scaled(150,150,Qt::KeepAspectRatio);
+    QPixmap pmap1 = QPixmap::fromImage(image1);
+    QPixmap pmap2 = QPixmap::fromImage(image2);
+    addWidgetToGrid(pmap1,pmap2,index,filename);
 }
 
-void BoxImage::addWidgetToGrid(QPixmap &pixmap,int index,QString &filename)
+void BoxImage::addWidgetToGrid(QPixmap &raw_pixmap, QPixmap &pixmap,int index,QString &filename)
 {
     cout << "call BoxImage::addWidgetToGrid(QPixmap &pixmap,index=" << index << ",filename=" << filename.toLocal8Bit().constData() << ")" << endl;
     //always create new label and add to back of grid
@@ -343,11 +344,12 @@ void BoxImage::addWidgetToGrid(QPixmap &pixmap,int index,QString &filename)
     if(index == size)
     {
         label->setPixmap(pixmap);
+        label->internalPixmap = raw_pixmap;
         label->filename = filename;
     }
     else
     {
-        shiftPixmapsUpAndInsert(pixmap,index,filename);
+        shiftPixmapsUpAndInsert(raw_pixmap,index,filename);
     }
 
     //activate "delete all" action
@@ -363,9 +365,11 @@ void BoxImage::shiftPixmapsUpAndInsert(QPixmap &newpixmap,int index,QString &fil
     {
         const QPixmap *pm = widgets[i-1]->pixmap();
         widgets[i]->setPixmap(*pm);
+        widgets[i]->internalPixmap = widgets[i-1]->internalPixmap;
         widgets[i]->filename = widgets[i-1]->filename;
     }
-    widgets[index]->setPixmap(newpixmap);
+    widgets[index]->setPixmap(newpixmap.scaled(150,150,Qt::KeepAspectRatio));
+    widgets[index]->internalPixmap = newpixmap;
     widgets[index]->filename = filename;
     return;
 }
@@ -416,6 +420,7 @@ void BoxImage::shiftPixmapsDown(int index)
         const QPixmap *pm = widgets[i+1]->pixmap();
         if(pm)
             widgets[i]->setPixmap(*pm);
+        widgets[i]->internalPixmap = widgets[i+1]->internalPixmap;
         widgets[i]->filename = widgets[i+1]->filename;
     }
     return;
@@ -542,7 +547,7 @@ void BoxImage::updateUndoRedoActions(void)
 
 const QPixmap* BoxImage::getPixmapAt(int index)
 {
-    return widgets[index]->pixmap();
+    return &(widgets[index]->internalPixmap);
 }
 
 void BoxImage::updatePlayActionStatus()

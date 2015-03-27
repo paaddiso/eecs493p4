@@ -74,7 +74,7 @@ class BoxImage : public QWidget
     public:
         std::vector<ClickableLabel*> widgets;
         void addVectorOfCheckedFiles(std::vector<QString> filenames,int index);
-        void addWidgetToGrid(QPixmap &pixmap,int index,QString &filename);
+        void addWidgetToGrid(QPixmap &raw_pixmap, QPixmap &pixmap,int index,QString &filename);
         void removeRange(int index,int range);
         int getLabelIndex(ClickableLabel*);
         const QPixmap* getPixmapAt(int index);

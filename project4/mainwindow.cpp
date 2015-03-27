@@ -216,7 +216,8 @@ void MainWindow::update()
     }
 
     const QPixmap *pmap = boximg->getPixmapAt(currentDisplayIndex);
-    leftwidget->setPixmap(*pmap);
+    QPixmap pixmap_copy = pmap->scaled(300,300,Qt::KeepAspectRatio);
+    leftwidget->setPixmap(pixmap_copy);
 }
 
 /* setTimer()
