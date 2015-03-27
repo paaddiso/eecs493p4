@@ -58,14 +58,9 @@ MainWindow::MainWindow(QWidget *parent)
     scrollArea->setWidget(boximg);
     scrollArea->setWidgetResizable(true);
 
-    //splitter
-    QSplitter *splitter = new QSplitter();
-    splitter->addWidget(dock);
-    splitter->addWidget(scrollArea);
-    splitter->setStretchFactor(0,0);
-    splitter->setStretchFactor(1,1);
-
-    setCentralWidget(splitter);
+    //add dock to dock area and set central widget
+    setCentralWidget(scrollArea);
+    addDockWidget(Qt::LeftDockWidgetArea, dock);
 
     //timer
     timer = new QTimer(this);
